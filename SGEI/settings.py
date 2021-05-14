@@ -15,10 +15,11 @@ import dj_database_url
 from django.contrib.messages import constants
 
 # Banco de dados  Postgres
-
+"""
 DATABASES = {
     'default': dj_database_url.config()
 }
+"""
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -101,14 +102,12 @@ WSGI_APPLICATION = 'SGEI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
