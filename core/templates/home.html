@@ -1,0 +1,84 @@
+{% extends 'baseP.html'%} {% load static %} {% block title %} Home {% endblock %} {% block content %}
+<div class="container">
+
+    <div id="accordion">
+        <div class="row justify-content-center" >
+            <div class=" col-md-8">
+                {% include 'includes/mensagens.html'%}
+                <h4><b class="text-dark">Editais Aberto</b></h4><hr>
+                {%for edital in editais_abertos%}
+                <div class="card">
+                    <div class="card-header coll">
+                        <h5 class="mb-0">
+                            <div  data-toggle="collapse" data-target="#collapseOneEd_Aberto-{{edital.id}}" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="ml-2 mr-2"> <i class="fas fa-list-ul "></i> {{edital.titulo}}</span>
+                            </div>
+                        </h5>
+                    </div>
+                    <div id="collapseOneEd_Aberto-{{edital.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <h5> <b>Descrição: </b> <p class="mt-2">{{edital.descricao}}</p></h5>
+                            <div class="row float-right">
+                                <div class="float-right">
+                                    <a href="{% url 'editais:edital_view' edital.id %}" class="btn btn-success mb-2 mt-4">Mais Detelhes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+                <br>
+                <h4><b class="text-dark">Editais em Analise </b></h4><hr>
+                {%for edital in editais_analise%}
+                <div class="card">
+                    <div class="card-header coll">
+                        <h5 class="mb-0">
+                            <div data-toggle="collapse" data-target="#collapseOneEd_analise-{{edital.id}}" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="ml-2 mr-2"> <i class="fas fa-list-ul "></i> {{edital.titulo}}</span>
+                            </div>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOneEd_analise-{{edital.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <h5> <b>Descrição: </b> <p class="mt-2">{{edital.descricao}}</p></h5>
+                            <div class="row float-right">
+                                <div class="float-right">
+                                    <a href="{% url 'editais:edital_view' edital.id %}" class="btn btn-success mb-2 mt-4">Mais Detelhes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {%endfor%}
+                <br><br>
+                <h4><b class="text-dark">Editais fechados </b></h4><hr>
+                {%for edital in editais_fechados%}
+                <div class="card">
+                    <div class="card-header coll">
+                        <h5 class="mb-0">
+                            <div  data-toggle="collapse" data-target="#collapseOneEd_fechados-{{edital.id}}" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="ml-2 mr-2"> <i class="fas fa-list-ul "></i> {{edital.titulo}}</span>
+                            </div>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOneEd_fechados-{{edital.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <h5> <b>Descrição: </b> <p class="mt-2">{{edital.descricao}}</p></h5>
+                            <div class="row float-right">
+                                <div class="float-right">
+                                    <a href="{% url 'editais:edital_view' edital.id %}" class="btn btn-success mb-2 mt-4">Mais Detelhes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

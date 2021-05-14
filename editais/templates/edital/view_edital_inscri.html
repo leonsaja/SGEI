@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} {{edital.title}} {% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+    {% include 'includes/mensagens.html'%}
+    <div class="row justify-content-center" >
+        <div class=" col-md-10">
+
+
+            <div class="card mb-3">
+                <div class="card-header"><h5><b>{{edital.titulo}}</b></h5> </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 ml-3 mt-3">
+                            <h5> <b>Status:</b></h5> <h6>{{edital.get_status_display}}</h6>
+                        </div>
+                        <div class="col-md-3 ml-3 mt-3">
+                            <h5>  <b>Descrição :</b> </h5>{{edital.descricao}}
+                        </div>
+                        <div class="col-md-3 ml-3 mt-3">
+                            <h5> <b>Arquivo: </b></h5>
+                            {%if edital.arquivo%}
+
+                            <a href="/media/{{edital.arquivo}}" target='_blank'> <i class="far fa-file-pdf"> </i> {{edital.titulo}}</a>
+                            {%endif%}
+                        </div>
+                        <div class="col ml-3 mt-2 mb-5">
+                            <br>
+                            {%if edital.status == "ab"%}
+                                    {% if situacao %}
+                                         <a href="{% url 'editais:inscricao_do' edital.id %}" class="btn btn-success disabled">Inscrever-se</a>
+                                    {%elif edital.status == "fn"%}
+                                        <a href="{% url 'editais:resultado_edital' edital.id%}" class="btn btn-success ">Resultados</a>
+                                    {%else%}
+                                        <a href="{% url 'editais:inscricao_do' edital.id %}" class="btn btn-success " >Inscrever-se</a>
+                                    {%endif%}
+                            {%elif edital.status == "em"%}
+                                 <a href="{% url 'editais:inscricao_do' edital.id %}" class="btn btn-success disabled">Aguardando</a>
+                            {%elif edital.status == "fn"%}
+                                  <a href="{% url 'editais:resultado_edital' edital.id%}" class="btn btn-success ">Resultados</a>
+                            {%endif%}
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

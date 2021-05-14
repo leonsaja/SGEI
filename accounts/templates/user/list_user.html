@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% load static %} {% load bootstrap4 %} {% block title %} Lista de usuarios {% endblock %} {% block content %}
+<div class="container">
+         {% include 'includes/mensagens.html'%}
+    <div class="card shadow mb-4  mt-4">
+        <div class="card-header">
+                    <h5 ><b>Lista de usuarios </b></h5>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="thead-light">
+                      <tr>
+
+                        <th><b>Nome</b></th>
+                        <th><b>Email</b></th>
+                        <th><b>CPF</b></th>
+                        <th><b>Telefone</b></th>
+                          <th><b>Opcão</b></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                   {% for user in list_user %}
+                    <tr>
+
+                        <td>{{user.first_name}} {{last_name}}</td>
+                         <td>{{user.email}}</td>
+                         <td>{{user.cpf}}</td>
+                         <td>{{user.fone}}</td>
+                         <td><a href="{% url 'accounts:upd_user' user.id %}" class="btn btn-success">
+                                   Editar
+                         </a></td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

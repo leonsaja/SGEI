@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} {{edital.title}} {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% include 'includes/mensagens.html'%}
+    <div class="card shadow mb-4  mt-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6 mt-1">
+                    <h6><b>Resultado:</b> <span class="text-dark">{{edital.titulo}}</span> </h6>
+                </div>
+                <div class="col-md-6 mt-1">
+                    <h6> <b>Descrição:</b> <span class="text-dark"> {{edital.descricao}}</span></h6>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for insc in aprovados%}
+                    <tr>
+                        <td>
+                            {{insc.user.first_name}}
+                        </td>
+                        <td>
+                            Classificado
+                        </td>
+                    </tr>
+
+
+                    {%endfor%}
+                    {% for insc in reprovados%}
+                    <tr>
+                        <td>
+                            {{insc.user.first_name}}
+                        </td>
+                        <td>
+                            Não Classificado
+                        </td>
+                    </tr>
+                    {%endfor%}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+
+
+</div>
+
+
+
+{% endblock %}
+
+      <!-- <div class="row">
+            <h3> <b> Resultado Edital:  </b>    {{edital.titulo}} </h3>
+        </div>
+
+            <div class="col-md-10">
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Status</th>
+                         <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for insc in aprovados%}
+                    <tr>
+                        <td>
+                        {{insc.user.first_name}}
+                        </td>
+                        <td>
+                            Classificado
+                        </td>
+                    </tr>
+
+
+            {%endfor%}
+            {% for insc in reprovados%}
+                <tr>
+                    <td>
+                        {{insc.user.first_name}}
+                    </td>
+                    <td>
+                        Não Classificado
+                    </td>
+                </tr>
+            {%endfor%}
+                <td>
+                     {{edital.descricao}}
+                </td>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        -->

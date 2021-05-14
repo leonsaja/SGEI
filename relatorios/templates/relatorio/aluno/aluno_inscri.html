@@ -1,0 +1,96 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Relatorio</title>
+
+    <style type="text/css">
+
+
+        table {
+            width: 100%;
+            margin-bottom: 10cm;
+            margin-left: 10px;
+            padding-top: 5px;
+
+        }
+
+        .table-bordered {
+            border: 1px solid #e3e6f0;
+             margin-top:5px;
+
+
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #e3e6f0;
+        }
+
+        .table-bordered thead th,
+        .table-bordered thead td {
+            border-bottom-width: 1px;
+
+        }
+
+        .table-borderless th,
+        .table-borderless td,
+        .table-borderless thead th,
+        .table-borderless tbody+tbody {
+            border: 5px;
+        }
+    </style>
+</head>
+<body>
+
+
+<table class="table table-bordered">
+
+    <thead>
+            <tr>
+               <th rowspan="2" colspan="2" style="padding:5px;"> <img src="static/img/img.png" height="110px" width="220px"></th>
+                <th colspan="6"> Assistência Estudantil </th>
+
+
+            </tr>
+
+            <tr>
+                  <td colspan="6"  style="text-align: center;"> <b>Edital: </b>  {{inscricao.edital}}</td>
+
+            </tr>
+
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align: center;"> <b>Nome: </b> {{inscricao.user.first_name}} {{inscricao.user.last_name}}</td>
+               <td  colspan="2" style="text-align: center;"> <b>Nivel de Vulnerabilidade: </b>  {{inscricao.nivel}} </td>
+        </tr>
+             <tr>
+            <th colspan="4">Pergunta:</th>
+            <th colspan="4">Resposta:</th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        {%for resp in inscricao.resposta_set.all%}
+            <tr>
+                <td colspan="4">{{resp.pergunta.descricao}}</td>
+                {%if resp.pergunta.is_aberta == True and resp.pergunta.has_arquivo == True %}
+                <td  colspan="4">
+                            <a href="/media/{{resp.arquivo }} " target='_blank'>Arquivo</a>
+                        </td>
+                {%elif resp.pergunta.is_aberta %}
+                <td colspan="4">{{resp.resposta_aberta}}</td>
+                {%else%}
+                    <td  colspan="4">{{resp.alternativa}}</td>
+                {%endif%}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

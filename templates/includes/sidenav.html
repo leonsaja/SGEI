@@ -1,0 +1,154 @@
+
+{% if request.user.is_staff %}
+
+<ul class="navbar-nav sidebar sidebar-dark accordion menu " id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'core:index'%}">
+        <div class="sidebar-brand-icon rotat-n-15">
+            <img src="/static/img/logo.png" alt="" width="50cm" height="50cm">
+        </div>
+        <div class="sidebar-brand-text mx-3"> SGEI <sup>IFNMG</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-2">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:index'%}">
+            <i class="fas fa-home fas 5x"></i>
+            <span>Inicio</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo-menu" aria-expanded="true" aria-controls="collapseTwo2-menu">
+            <i class=" fas fa-clipboard-list"></i>
+            <span>Editais</span>
+        </a>
+        <div id="collapseTwo-menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+                <a class="collapse-item" href="{% url 'editais:edital_add' %}">Adicionar Edital</a>
+                <a class="collapse-item" href="{% url 'editais:edital_list'%}">Listar Editais</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="far fa-copy"></i>
+            <span>Inscrição</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'editais:inscricao_list'%}">Listar inscrições</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-users fas-3x"></i>
+            <span>Usuarios</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'accounts:add_user' %}">Adicionar Usuario</a>
+                <a class="collapse-item" href="{% url 'accounts:list_user' %} ">Listar Usuarios</a>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Heading
+    <div class="sidebar-heading">
+        Addons
+    </div>
+ -->
+    <!-- Nav Item - Pages Collapse Menu -->
+
+
+    <hr class="sidebar-divider">
+
+
+
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+
+
+
+</ul>
+
+{% else %}
+<ul class="navbar-nav sidebar sidebar-dark accordion menu " id="accordionSidebar">
+
+
+     <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="{% url 'core:index'%}">
+        <div class="sidebar-brand-icon rotat-n-15">
+            <img src="/static/img/logo.png" alt="" width="50cm" height="50cm">
+        </div>
+        <div class="sidebar-brand-text mx-3"> SGEI <sup>IFNMG</sup></div>
+    </a>
+    <br>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:index'%}">
+            <i class="fas fa-home "></i>
+            <span>Inicio</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo-menu" aria-expanded="true" aria-controls="collapseTwo2-menu">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Editais</span>
+        </a>
+        <div id="collapseTwo-menu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'editais:edital_list_inscri'%}">Listar Editais</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="far fa-copy "></i>
+            <span>Inscrição</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'editais:inscricao_list_user' %}">Listar inscrições</a>
+            </div>
+        </div>
+    </li>
+
+    <br><br>
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+</ul>
+
+{%endif%}

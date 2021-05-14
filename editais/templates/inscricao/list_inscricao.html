@@ -1,0 +1,134 @@
+{% extends 'base.html'%} {% load static%} {% load bootstrap4 %}
+
+{% block title %} Inscrições {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% include 'includes/mensagens.html'%}
+    <div class="row">
+        <div class="col-md-4">
+            <label class="my-1 mr-2"><b>Edital</b></label>
+            <select class="custom-select my-1 mr-sm-2" id="edital">
+                <option selected>escolha uma opção...</option>
+                {% for edital in editais %}
+                <option value="{{edital.id}}">{{edital.titulo}}</option>
+                {%endfor%}
+            </select>
+
+        </div>
+        <div class="col-md-4">
+
+            <label class="my-1 mr-2" ><b>Status</b></label>
+            <select class="custom-select my-1 mr-sm-2" id="status">r
+                <option value="">Escolha uma opção...</option>
+                <option value="df">Inscrições deferidas</option>
+                <option value="in">Inscrições indeferidas </option>
+                <option value="an">Inscrições em Analise </option>
+            </select>
+
+        </div>
+    </div>
+    <div class="card shadow mb-4  mt-4">
+        <div class="card-header">
+            <h5><b>Lista de Inscrições </b></h5>
+        </div>
+        <div class="row gutters-sm">
+            <div class="col-md-6 ">
+                <ul class="pagination ml-3 mt-3">
+                    {% for  pagina in  inscricao_list.paginator.page_range %}
+                    {%if  inscricao_list.number == pagina %}
+                    <li class="page-item active">
+                        <a class="page-link" href="?p={{pagina}}&busca={{request.GET.busca}}">{{pagina}}</a>
+                    </li>
+                    {%else%}
+                    <li class="page-item">
+                        <a class="page-link" href="?p={{pagina}}&busca={{request.GET.busca}}">{{pagina}}</a>
+                    </li>
+                    {%endif%}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6 ">
+                <div class="float-right mr-3 mt-3">
+                    <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 " method="GET">
+
+                        <div class="input-group">
+                            <input name="busca" type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa"  value="{{request.GET.busca}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" >
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Aluno</th>
+                        <th>Edital</th>
+                        <th>Situação</th>
+                        <th>Pontos</th>
+                        <th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {%for inscricao in inscricao_list%}
+                    <tr>
+
+                        <td>{{inscricao.user.first_name}}  {{inscricao.user.last_name}}</td>
+                        <td>{{inscricao.edital.titulo}}</td>
+                        {%if inscricao.status == "an"%}
+                        <td class = " yellow accent-2">{{inscricao.get_status_display}}</td>
+                        {%endif%}
+                        {%if inscricao.status == "df"%}
+                        <td class=" teal lighten-1">{{inscricao.get_status_display}}</td>
+                        {%endif%}
+                        {%if inscricao.status == "in"%}
+                        <td class = " red darken-3">{{inscricao.get_status_display}}</td>
+                        {%endif%}
+                        <td>{{inscricao.nivel}}</td>
+                        <td><a href="{% url 'editais:inscricao_view' inscricao.id %}" class="btn btn-success"> Avaliar </a></td>
+                    </tr>
+                    {%endfor%}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+$( document ).ready(function() {
+
+var baseUrl   = "/editais/inscricao/";
+var searchBtn = $('#search-btn');
+var searchForm = $('#search-form');
+var status     = $('#status');
+var edital     = $('#edital');
+
+
+$(searchBtn).on('click', function() {
+searchForm.submit();
+});
+
+$(status).change(function() {
+var status = $(this).val();
+window.location.href = baseUrl + '?status=' + status;
+});
+
+$(edital).change(function() {
+var edital = $(this).val();
+window.location.href = baseUrl + '?edital=' + edital;
+});
+});
+
+{% endblock %}

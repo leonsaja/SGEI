@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Inscrição {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% include 'includes/mensagens.html'%}
+    <div class="card  mt-4">
+        <div class="card-header">
+            <div class="row mt-0">
+                <div class="col-md-6">
+                    <h5 class="ml-3 mt-2 mb-0" ><b>Inscrição </b>  </h5>
+                </div>
+                <div class="col-md-6">
+                    {%if inscricao.edital.status == "ab"%}
+                    <a href="{% url 'editais:inscricao_edit' inscricao.id%}" class="btn btn-warning float-right mr-2 mt-0 mb-0">Editar</a>
+                    {%elif inscricao.edital.status == "fn"%}
+                    <a href="{% url 'editais:resultado_edital' inscricao.edital.id%}" class="btn btn-success float-right mr-2 mt-0 mb-0">Resultados</a>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th colspan="3">Edital: <span class="text-dark">{{inscricao.edital}}</span></th>
+                        <th colspan="2" >Situação: <span class="text-dark">{{inscricao.get_status_display}}</span></th>
+
+                    </tr>
+                    <tr>
+                        <th colspan="5">Nome: <span class="text-dark">{{inscricao.user.first_name}} {{inscricao.user.last_name}}</span> </th>
+                    </tr>
+
+                    <tr>
+                        <th colspan="3">Pergunta</th>
+                        <th colspan="2">Resposta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {%for resp in inscricao.resposta_set.all%}
+                    <tr>
+                        <td colspan="3"><span class="text-dark">{{resp.pergunta}}</span></td>
+                        {%if resp.pergunta.is_aberta == True and  resp.pergunta.has_arquivo == True %}
+                        <td colspan="2">
+                            <a href="/media/{{resp.arquivo }} " target='_blank'><span class="text-dark">{{MEDIA_URL}}{{ resp.arquivo}}</span></a>
+                        </td>
+                        {%elif resp.pergunta.is_aberta %}
+                        <td colspan="2"><span class="text-dark">{{resp.resposta_aberta}}</span></td>
+                        {%else%}
+                        <td colspan="2"><span class="text-dark">{{resp.alternativa}}</span></td>
+                        {%endif%}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

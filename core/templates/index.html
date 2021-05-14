@@ -1,0 +1,225 @@
+{% extends 'base.html'%} {% load static %} {% block title %}Inicio{% endblock %} {% block content %}
+
+<div class="container-fluid">
+     {% if request.user.is_staff %}
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1><b>Painel de Contole</b></h1>
+
+    </div>
+
+    <!-- Content Row -->
+      {% if messages %}
+            <br>
+                {% for message in messages %}
+                    <div class="alert {{ message.tags}} " role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Editais Abertos</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtd_editais_abertos}}</div>
+                        </div>
+                        <div class="col-auto ">
+                            <i class=" far fa-copy fa-3x "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Editais em Analise</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtd_editais_analise}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Editais Fechados</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ qtd_editais_fechados}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Inscrições em Analise</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtd_inscricao_analise}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="far fa-address-card fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+
+    </div>
+
+    <!-- Content Row -->
+
+
+
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Direct
+                            </span>
+                        <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Social
+                            </span>
+                        <span class="mr-2">
+                                <i class="fas fa-circle text-info"></i> Referral
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    <div class="container">
+        {% if messages %}
+            <br>
+                {% for message in messages %}
+                    <div class="alert {{ message.tags}} " role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+
+            <h2>Assistência Estudantil</h2>
+
+            <p>A Política de Assistência Estudantil do IFNMG, aprovada pelo Conselho Superior em 25 de fevereiro de 2011 e
+                reformulada em 14 de dezembro de 2017, abarca programas que atendem seus discentes na modalidades integrado,
+                concomitante, subsequente, tecnologia, licenciatura, bacharelado e Proeja, todos na modalidade presencial.
+            </p>
+
+            <h6><b>Objetivos</b></h6>
+
+            <ul >
+                <li>
+                    Garantir, para o estudante em vulnerabilidade social, mecanismos que promovam condições socioeconômicas que viabilizem a permanência e o êxito no percurso escolar;
+                </li>
+                <li>
+                    Promover o acesso, a permanência e a conclusão de curso dos discentes do IFNMG com vistas à inclusão social e democratização do ensino;
+                </li>
+                <li>
+                    Assegurar aos discentes igualdade de oportunidade no exercício das atividades acadêmicas;
+                </li>
+                <li>
+                    Proporcionar ao estudante com necessidades educativas específicas as condições necessárias para o seu desenvolvimento acadêmico, conforme legislação vigente;
+                </li>
+                <li>
+                    Contribuir para a promoção do bem-estar biopsicossocial dos discentes;
+                </li>
+                <li>
+                    Contribuir para a melhoria do desempenho acadêmico, buscando minimizar a reprovação e a evasão escolar;
+                </li>
+                <li>
+                    Promover e ampliar a formação integral dos discentes, estimulando e desenvolvendo a criatividade, a reflexão crítica, as atividades e os intercâmbios: cultural, esportivo, artístico, político, científico e tecnológico.
+                </li>
+
+            </ul>
+
+
+
+    </div>
+
+    {%endif%}
+
+{% endblock %}

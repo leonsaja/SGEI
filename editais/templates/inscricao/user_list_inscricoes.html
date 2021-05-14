@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Inscrições {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% include 'includes/mensagens.html'%}
+    <div id="accordion">
+        <h4><b class="text-dark">Minhas  Inscrições</b></h4><br>
+        <h5><b class="text-dark">Editais abertos</b></h5>
+        <div class="card">
+            {%for insc in incricoes%}
+            {% if insc.edital.status == "ab"%}
+                <div class="card-header coll">
+                    <h5 class="mb-0">
+                        <div class="mt-2" data-toggle="collapse" data-target="#collapseOneEd_abertos-{{insc.id}}" aria-expanded="true" aria-controls="collapseOne">
+                            <span class="ml-2 mr-2"> <i class="fas fa-list-ul "></i> {{insc.edital}}</span>
+                        </div>
+                    </h5>
+                </div>
+                <div id="collapseOneEd_abertos-{{insc.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <h5 >  <b class="text-park">Descrição:</b> </h5>  <h6>{{insc.edital.descricao}}</h6>
+                        <br>  <br>
+                        <h5 >   <b class="text-park">Situação:</b> </h5>  {{insc.get_status_display}}
+
+                        <div class="float-right">
+                            <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn btn-success mb-4 ">Mais Detelhes</a>
+                        </div>
+                    </div>
+                </div>
+            {%endif%}
+            {%endfor%}
+        </div>
+
+        <br>
+        <h5><b class="text-dark">Editais em Analise</b></h5>
+        <div class="card">
+            {%for insc in incricoes%}
+            {% if insc.edital.status == "em"%}
+            <div class="card-header coll">
+                <h5 class="mb-0">
+                    <div class="mt-2" data-toggle="collapse" data-target="#collapseOneEd_analise-{{insc.id}}" aria-expanded="true" aria-controls="collapseOne">
+                       <span class="ml-2 mr-2"> <i class="fas fa-list-ul "></i> {{insc.edital}}</span>
+                    </div>
+                </h5>
+            </div>
+            <div id="collapseOneEd_analise-{{insc.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <h5>  <b class="text-park">Descrição:</b> </h5> {{insc.edital.descricao}}
+                    <h5 >  <b class="text-park">Situação:</b> </h5>  {{insc.get_status_display}}
+                    <div class="float-right">
+                        <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn btn-success mb-4 ">Mais Detelhes</a>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+
+        </div>
+        <br>
+        <h5><b class="text-dark">Editais em Fechados</b></h5>
+        <div class="card">
+            {%for insc in incricoes%}
+            {% if insc.edital.status == "fn"%}
+            <div class="card-header coll ">
+                <h5 class="mb-0">
+                    <div class="mt-2" data-toggle="collapse" data-target="#collapseOneEd_fechados-{{insc.id}}" aria-expanded="true" aria-controls="collapseOne">
+                    <span class="ml-2 mr-2"> <i class="fas fa-list-ul "></i> {{insc.edital}}</span>
+                    </div>
+                </h5>
+            </div>
+            <div id="collapseOneEd_fechados-{{insc.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <h5 class="text-park">  <b>Descrição:</b> </h5> {{insc.edital.descricao}}
+                    <br><br>
+                    <h5 class="text-park">  <b>Situação:</b> </h5>  {{insc.get_status_display}}</span></p>
+
+                    <div class="float-right">
+                        <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn btn-success mb-4 ">Mais Detelhes</a>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+        </div>
+    </div>
+</div>
+        {% endblock %}

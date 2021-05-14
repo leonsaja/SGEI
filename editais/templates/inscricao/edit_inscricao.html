@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Inscrição {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% include 'includes/mensagens.html'%}
+    <div class="card">
+        <h4 class="text-left ml-2 mt-3"><b>Editar Inscrição</b></h4>
+        <div class="card-header">
+             <div class="row justify-content-start>
+                <div class="col-sm-12 col-md-10 col-lg-8">
+                    <form method="post"  enctype="multipart/form-data">
+                        <div class="form-row">
+                            {%csrf_token%}
+                             <div class="form-group col-sm-12">
+                                <label class="ml-2" for="edital_titulo">Edital</label>
+                                <input id="edital_titulo" class="form-control" type="text" name="edital_titulo" value="{{inscricao.edital.titulo}}" readonly>
+                            </div>
+                        {% for resp in inscricao.resposta_set.all%}
+
+                            {% if resp.pergunta.is_aberta == True and resp.pergunta.has_arquivo == True %}
+
+                             <div class="form-group col-sm-12">
+                             <label class="ml-2">{{resp.pergunta.descricao}}</label>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">Arquivo</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" name="arquivo-{{resp.pergunta.id}}" class="custom-file-input"  id="arquivo-{{resp.pergunta.id}}" value="{{MEDIA_URL}}{{ resp.arquivo}}">
+                                        <label class="custom-file-label">{{MEDIA_URL}}{{ resp.arquivo}}</label>
+                                    </div>
+                                 </div>
+                            </div>
+
+                            {%elif resp.pergunta.is_aberta == True%}
+
+                                <div class="form-group col-sm-12">
+                                    <label for="pergunta-{{resp.pergunta.id}}">{{resp.pergunta.descricao}}</label>
+                                    <input id="pergunta-{{resp.pergunta.id}}" class="form-control" type="text" name="pergunta-{{resp.pergunta.id}}" value="{{resp.resposta_aberta}}" />
+                                </div>
+
+                            {%else%}
+                            <div class="form-group col-sm-12 ">
+                                <label class="ml-1" for="pergunta-{{resp.pergunta.id}}">{{resp.pergunta.descricao}}</label>
+                                <select class="custom-select" name="pergunta-{{resp.pergunta.id}}" required">
+                                    <option  disabled selected>Escolha uma Opção</option>
+                                   {%for alternativa in resp.pergunta.alternativa_set.all%}
+
+                                        {% if alternativa.id == resp.alternativa.id %}
+                                            <option value="{{alternativa.id}}" selected>{{alternativa.descricao}}</option>
+                                        {%else%}
+                                            <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
+                                        {%endif%}
+                                    {%endfor%}
+                                </select>
+                            </div>
+
+                            {%endif%}
+                            {%endfor%}
+                         <a href="{% url 'editais:inscricao_view_user' inscricao.id %}" class="btn btn-warning  mr-2 ml-2">Cancelar</a>
+                        <button type="submit" class="btn btn-success " >Salvar</button>
+
+                 </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

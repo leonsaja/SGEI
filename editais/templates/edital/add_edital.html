@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% load static%} {% load bootstrap4 %}
+{%block title%} Novo Edital {%endblock%} {% block content %}
+<div class="row">
+    <div class="container">
+    {% include 'includes/mensagens.html'%}
+        <form method="POST"  enctype="multipart/form-data" class="col-12 ">
+            <div class="card-content">
+                <h4 class="title">Novo Edital</h4>
+
+                <div class="row">
+                    <div class="col-12">
+                        {% csrf_token %}  {% bootstrap_form form %}
+
+
+                    {% buttons %}
+                        <div class="nav justify-content-end">
+                          <a href="{% url 'editais:edital_list' %}" class="btn btn-danger ml-2 mr-2">Cancelar</a>
+                          <button type="submit" class="btn btn-success">Salvar</button>
+                            </div>
+
+                        {% endbuttons %}
+
+                    </div>
+                </div>
+
+
+
+        </form>
+        </div>
+    </div>
+
+
+    {% endblock %}

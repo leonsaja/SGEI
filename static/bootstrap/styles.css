@@ -1,0 +1,41 @@
+.navbar.bar {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/*  sidebar  menu lateral  */
+
+.navbar-nav.sidebar.sidebar-dark.accordion.menu {
+    background-color: #066017;
+
+}
+/*  rodape da pagina */
+.sticky-footer.rodape{
+     background-color: #066017;
+}
+/* collapse botão */
+.card-header.coll{
+background-color: #066017;
+color:white;
+
+}
+/* bar admin-django  */
+.main-sidebar.bar{
+background-color: #066017;
+}
+
+/* body*/
+body{
+
+    color: black !important;
+}
+th{
+    color: black !important;
+}
+
+table{
+      color: black !important;
+
+}
+
+

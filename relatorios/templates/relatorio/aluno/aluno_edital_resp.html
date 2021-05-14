@@ -1,0 +1,40 @@
+{% extends 'relatorio.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+{% block title %} Relatorio{% endblock %}
+
+{% block content %}
+  
+  <br><br>
+  <div class="card-body">
+    <div class="table-responsive">
+<table class="table table-borderless" >
+    <thead class="thead-dark">
+    
+        <th rowspan="2" colspan="2" >  <img src="/static/img/img.png" height="130px" width="240px"></th>
+        <th colspan="6"> Assistência Estudantil  </th>
+    </thead >
+    
+    <tbody>
+            <tr >
+                <th colspan="6">Relatorio de Resposta de Aluno do Edital</th> 
+            </tr>
+
+            <tr>
+                <th colspan="8">EDITAL: </th>
+            </tr>
+        <tr>
+                <th colspan="4">Aluno</th>
+                
+                <th colspan="2">Pergunta</th>
+                
+                <th colspan="2">Resposta</th>
+        </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+ {% endblock %}

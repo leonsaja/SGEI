@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Cadastro de usuarios {% endblock %}
+
+{% block content %}
+<div class="espacamento">
+    <div class="row">
+        <h4 class="title">Cadastro de usuarios em massa</h4>
+       
+            <form method="post" enctype="multipart/form-data" class="col s12" >
+                <div class="row">
+                    {%csrf_token%}
+                     <label for="arquivo">Faça o upload do arquivo com a lista de usuarios</label>
+                     <label for="arquivo">
+                         Os dados do arquivo devem estar na seguinte ondem<br>
+                         username, email, cpf<br>
+                         Separados por um espaço em branco
+                     </label>
+
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file" id="arquivo" name="arquivo" required>
+
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="right">
+                        <a href="#" class="btn btn-deletar red ">Cancelar</a>
+                        <button type="submit" class="btn btn-salvar blue" >Carregar</button>
+                    </div>
+                </div>      
+            </form>
+        
+        </div>
+    
+</div>
+
+{% endblock %}

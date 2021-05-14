@@ -1,0 +1,58 @@
+{% extends 'base.html'%} {% load static%} {% load bootstrap4 %}
+{%block title%} Edital Pergunta {%endblock%} {% block content %}
+<div class="container">
+    {% include 'includes/mensagens.html'%}
+
+     <h4 > <b>Edital Pergunta</b>  </h4>
+    <div class="card">
+        <br>
+        <div class="card-header">
+            <div class="card-title ml-2 mr-2"><h5><b>{{edital.titulo}}</b></h5></div>
+        </div>
+
+        <div class="row ">
+            <div class="container">
+                <form method="post" enctype="multipart/form-data" class=" col-12 ">
+                    <div class="row">
+                        <div class="col-12">
+                            <br>
+                            {% csrf_token %}    {% bootstrap_form form %}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{form_alternativa.management_form}} {% for alternativa in form_alternativa%}
+
+                        <div class="col-md-12">
+                            <div class="inlineform">
+                                {% bootstrap_form  form=alternativa %}
+                            </div>
+                        </div>
+
+                        {%endfor %}
+                    </div>
+
+                    <div class="nav justify-content-end">
+                        <a href="{% url 'editais:edital_view' edital.id%}" class="btn  btn-danger mr-2 ml-2 mb-4">Cancelar</a>
+                        <button type="submit" class="btn btn-success mb-4">Salvar</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %} {% block scripts %}
+
+$(function() {
+$('.inlineform').formset({
+prefix: '{{ form_Pergunta.prefix }}',
+addText: '<br><br><i class="material-icons">add</i> Adicionar nova Alternativa ',
+deleteText: '<br><i class="material-icons">delete</i> Remover esta alternativa',
+});
+})
+
+{% endblock scripts %}
