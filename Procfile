@@ -1,0 +1,1 @@
+web: gunicorn SGEI.wsgi --log-file -

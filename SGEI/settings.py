@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i%5va=!n*kr&+t94x)obm^=sn_@wf9nu0p_(e2@l2a)o=9wuyt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -152,6 +153,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static'
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # usado durante a produção
 
 
 # Django-allauth
