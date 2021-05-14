@@ -7,6 +7,7 @@ cffi==1.14.5
 chardet==4.0.0
 cryptography==3.4.7
 defusedxml==0.7.1
+dj-database-url==0.5.0
 dj-static==0.0.6
 Django==3.2.3
 django-adminlte3==0.1.6
@@ -22,6 +23,8 @@ idna==2.10
 oauthlib==3.1.0
 pi==0.1.2
 Pillow==8.2.0
+pkg-resources==0.0.0
+psycopg2-binary==2.8.6
 pycparser==2.20
 PyJWT==2.1.0
 PyPDF2==1.26.0
