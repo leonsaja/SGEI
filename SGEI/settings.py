@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'SGEI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-"""
+""" 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -155,11 +155,9 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
     'static'
 ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # usado durante a produção
 
 
@@ -169,7 +167,6 @@ MEDIA_URL = '/media/'
 
 
 SESSION_COOKIE_AGE = 1800
-
 SESSION_SAVE_EVERY_REQUEST = True
 
 # Default primary key field type

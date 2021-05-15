@@ -7,11 +7,11 @@
 
     {% block footer_left %}
     {% block legal %}
-    <strong>Copyright &copy; {% now "Y" %}{% if not site %}.{% endif %}
+    <strong >Copyright &copy; IFNMG {% now "Y" %}{% if not site %}.{% endif %}
         {% if site %}
             <a href="http://{{ site.domain }}">{{ site.name }}</a>
         {% endif %}
-    </strong> IFNMG
+    </strong>
     {% endblock %}
     {% endblock %}
 </footer>

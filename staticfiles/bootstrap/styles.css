@@ -21,7 +21,7 @@ color:white;
 }
 /* bar admin-django  */
 .main-sidebar.bar{
-background-color: #066017;
+background-color: #066017 !important;
 }
 
 /* body*/

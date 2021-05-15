@@ -1,10 +1,10 @@
 {% load adminlte_helpers %}
 {%load static %}
 <!-- Left side column. contains the sidebar -->
-<aside class="main-sidebar sidebar-dark-primary  elevation-4 bar">
+<aside class="main-sidebar sidebar-dark-primary  elevation-4 " style="background-color:#066017 !important;">
      <!-- Brand Logo -->
     {% block logo %}
-        <a href="/" class="brand-link">
+          <a href="{% url 'admin:index' %}"" class="brand-link">
             <img src="/static/img/logo.png" alt="" class="brand-image img-circle elevation-3" width="50cm" height="50cm">
             {% block logo_text %}<span class="brand-text font-weight-light">SGEI  <sup>IFNMG</sup> </span>{% endblock %}
         </a>
@@ -14,14 +14,6 @@
         <!-- Sidebar user panel -->
         {% block user_panel %}
         <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/media/{{user.foto}}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{% firstof request.user.first_name request.user.username %}</a>
-        </div>
-      </div>
         {% endblock %}
 
         {% block form %}{% endblock %}

@@ -6,20 +6,20 @@
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                  <img src="{%avatar_url 128 %}" class="user-image img-circle elevation-2" alt="User Image">
-                  <span class="d-none d-md-inline">{% firstof request.user.get_short_name request.user.get_username %}</span>
+                  <span class="d-none d-md-inline mr-2">Olá, {{user.first_name}}</span>
+                     <img src="/media/{{user.foto}}" class="user-image img-circle elevation-2" alt="User Image">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                   <!-- User image -->
-                  <li class="user-header bg-primary">
-                    <img src="{%avatar_url size=160 %}" class="img-circle elevation-2" alt="User Image">
-        
+                  <li class="user-header bg-white">
+                    <img src="/media/{{user.foto}} "class="img-circle elevation-2" alt="User Image">
+
                     <p>
-                        {% firstof request.user.get_short_name request.user.get_username %} - {% firstof request.user.get_role %}
-                      <small>Member since : {{ request.user.date_joined }}</small>
+                          <span class="d-none d-md-inline">Olá, {{user.first_name}}</span>
                     </p>
                   </li>
                   <!-- Menu Body -->
+                                        <!--
                   <li class="user-body">
                     <div class="row">
                       <div class="col-4 text-center">
@@ -32,6 +32,7 @@
                         <a href="#">Friends</a>
                       </div>
                     </div>
+                    -->
                     <!-- /.row -->
                   </li>
                   <!-- Menu Footer-->

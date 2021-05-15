@@ -20,7 +20,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.add_message(request, messages.SUCCESS, 'Usuário logado com sucesso !')
+                messages.add_message(request, messages.SUCCESS, 'Seja Bem-Vindo !')
                 return redirect('core:index')
             else:
                 messages.add_message(request, messages.ERROR, 'Email ou senha invalida')
