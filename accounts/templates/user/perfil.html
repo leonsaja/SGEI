@@ -1,46 +1,114 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load bootstrap4 %}
+{% load crispy_forms_tags %}
 
-{% block title %} Editais {% endblock %}
+{% block title %} Meu  Perfil {% endblock %}
 
 {% block content %}
+
 <div class="container">
-  <div class="card shadow mb-4  mt-4">
-        <div class="card-header py-3">
-            <div class="row">
-                <div class="col-md-6">
 
-                    <h5> <b class="text-dark">Perfil</b> </h5>
-                </div>
-
+    <div class="main-body">
+        <div class="card">
+            {% include 'includes/mensagens.html'%}
+            <div class="card-header">
+                <h5>Meu Perfil</h5>
             </div>
+            <div class="row gutters-sm">
+                <div class="col-md-3 mb-3">
+                    <form method="POST"  enctype="multipart/form-data" class="col-12 ">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                {% if user.foto %}
+                                <img src="/media/{{user.foto}}" alt="Admin" class="rounded-circle" width="150">
+                                {% else %}
+                                <img src="/static/img/user.png" alt="Admin" class="rounded-circle" width="150">
+                                {%endif%}
+                                <div class="mt-3">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                           <h5> {{user.first_name}} </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6" >
+                                            <button type="button" class="btn btn-primary btn-sm mt-2 disabled" data-toggle="modal" data-target="#exampleModal-{{usuario.id}}">Editar foto </button>
+                                        </div >
+                                        <div class="col-sm-12 col-md-6">
+                                            <a href="#" class="btn btn-warning btn-sm mt-2 disabled">Editar senha </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                </div>
+                <div class="col-md-9">
+
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-4">
+                                <label for="inputEmail4">Usuário: </label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value=" {{ user.username}}" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="inputEmail4">Nome: </label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ user.first_name}}" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="inputEmail4">Sobrenome: </label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ user.last_name}}" readonly>
+
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-4">
+                                <label for="inputEmail4">Email: </label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ user.email}}" readonly>
+
+                            </div>
+                            <div class="form-group col-sm-4" >
+                                <label for="inputEmail4">CPF: </label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value=" {{ user.cpf}}" readonly>
+
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="inputEmail4">Telefone: </label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="  {{ user.fone}}" readonly>
+                            </div>
+                        </div>
+                        {% if user.is_staff == True%}
+                        <div class="form-group">
+                            <div class="form-row">
+
+                                <div class="form-check mr-5">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value=" {{ user.is_staff}}" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Membro da equipe:
+                                    </label>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+
+                    </div>
+                    </form>
+
+                        <div class="col-sm-6">
+                            <a href="{% url 'core:index'%}" class="btn btn-danger  mb-3 mr-2">Cancelar</a>
+                            <a href="{% url 'accounts:upd_user' user.id%}" class="btn btn-warning  mb-3">Editar</a>
+                        </div>
+
+                </div>
+            </div>
+
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
-
-                <thead class="thead-dark">
-                <th>Nome:</th>
-                <th>Email:</th>
-                <th>Opção:</th>
-
-                </thead>
-                <tbody>
-                    <tr>
-
-                        <td>{{user.first_name}} {{user.last_name}}</td>
-                        <td>{{user.email}}</td>
-                        <td><a href="{% url 'accounts:upd_user' user.id %} " class="btn btn-warning" > Editar</a></td>
-
-                    </tr>
-                </tbody>
-
-
-
-            </table>
-        </div>
-    </div>
     </div>
 </div>
 {% endblock %}

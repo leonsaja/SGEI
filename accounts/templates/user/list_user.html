@@ -28,9 +28,7 @@
                          <td>{{user.email}}</td>
                          <td>{{user.cpf}}</td>
                          <td>{{user.fone}}</td>
-                         <td><a href="{% url 'accounts:upd_user' user.id %}" class="btn btn-success">
-                                   Editar
-                         </a></td>
+                         <td><a href="{% url 'accounts:upd_user' user.id %}" class="btn btn-success">Editar</a></td>
 
                     </tr>
                     {% endfor %}

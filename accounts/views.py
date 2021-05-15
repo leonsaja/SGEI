@@ -1,5 +1,3 @@
-from django.contrib.auth.hashers import make_password
-from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUsuarioCreateForm, LoginForm, CustomUsuarioChangeForm, UserAdminForm
 from django.contrib.auth import authenticate, login
@@ -48,11 +46,8 @@ def register_user(request):
 
 def usuario_edit(request, id):
     context = {}
-    u=id
+
     user = get_object_or_404(User, pk=id)
-
-
-    print(u)
     if request.method == 'POST':
 
         form = CustomUsuarioChangeForm(request.POST, request.FILES, instance=user, prefix='user')
@@ -63,6 +58,7 @@ def usuario_edit(request, id):
             messages.add_message(request, messages.SUCCESS, 'Perfil Atualizado com sucesso ')
 
             return redirect('accounts:upd_user', id=user.id)
+
         else:
             context['usuario'] = user
             context['form'] = CustomUsuarioChangeForm(request.POST or None, instance=user, prefix='user')
@@ -80,20 +76,22 @@ def perfil(request):
     user = request.user
 
     context['user'] = user
-    return render(request, 'user/edit_user.html', context)
+    return render(request, 'user/perfil.html', context)
 
-def edit_password(request):
+def edit_password(request, id):
 
     context = {}
-    user = request.user
-    form = PasswordChangeForm(request.POST or None)
+    usuario = get_object_or_404(User, pk=id)
+
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
+        form = PasswordChangeForm(data=request.POST, user=usuario)
+
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
             messages.add_message(request, messages.SUCCESS, 'Senha altera com sucesso  !!')
-            return redirect('accounts:upd_user', id=user.id)
+
+            return redirect('accounts:upd_user', id=usuario.id)
 
     else:
         form = PasswordChangeForm(request.POST or None)
@@ -102,17 +100,16 @@ def edit_password(request):
     return render(request, 'user/edit_password.html', context)
 
 def user_novo(request):
+
     context ={}
     request.user
 
-    user = User()
-    form = UserAdminForm(request.POST or None, request.FILES or None)
 
     if request.method == 'POST':
         form = UserAdminForm(request.POST, request.FILES)
-        print('teste')
+
         if form.is_valid():
-            print('teste')
+
             form = form.save(commit=False)
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Cadastro realizado com sucesso !!')
@@ -159,9 +156,8 @@ def create_user_arquivo(request):
 """
 
 def list_users(request):
+
     context = {}
-
-    users = User.objects.filter(is_staff=True)
+    users = User.objects.filter(is_active=True)
     context['list_user'] = users
-
     return render(request, 'user/list_user.html', context)

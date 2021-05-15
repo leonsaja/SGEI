@@ -38,6 +38,7 @@ class UsuarioManager(BaseUserManager):
 
 
 class User(AbstractUser):
+
     username = models.CharField('Usuario', max_length=25, unique=True)
     email = models.EmailField('E-mail', unique=True)
     foto = models.ImageField(blank=True, upload_to='user_foto', verbose_name='Foto', null='True')

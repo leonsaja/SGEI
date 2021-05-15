@@ -1,10 +1,11 @@
 {% extends 'baseP.html'%} {% load static %} {% block title %} Home {% endblock %} {% block content %}
 <div class="container">
-
     <div id="accordion">
         <div class="row justify-content-center" >
             <div class=" col-md-8">
                 {% include 'includes/mensagens.html'%}
+                <br>
+                <br>
                 <h4><b class="text-dark">Editais Aberto</b></h4><hr>
                 {%for edital in editais_abertos%}
                 <div class="card">
