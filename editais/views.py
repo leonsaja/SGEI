@@ -301,12 +301,13 @@ def inscricao_view(request, id):
 
 @login_required
 def inscricao_view_user(request, id):
+
     context = {}
     inscricao= get_object_or_404(Inscricao, pk=id)
 
     context['inscricao'] = inscricao
 
-    return render(request, 'inscricao/view_inscricao_user.html',context)
+    return render(request, 'inscricao/view_inscricao_user.html', context)
 
 
 @login_required
