@@ -140,7 +140,7 @@
                     <img src="/media/{{user.foto}}" class="img-circle elevation-2" alt="User Image">
 
                     <p>
-                        {% firstof request.user.get_short_name request.user.get_username %} - {% firstof request.user.get_role %}
+                      Olá, {% firstof request.user.get_short_name request.user.get_username %} - {% firstof request.user.get_role %}
                       <small>Member since : {{ request.user.date_joined }}</small>
                     </p>
                   </li>
