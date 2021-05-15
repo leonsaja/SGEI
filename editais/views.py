@@ -73,7 +73,7 @@ def  edital_edit(request, id):
         if form.is_valid():
             form = form.save(commit=False)
             form.save()
-
+            messages.add_message(request, messages.SUCCESS, 'Edital alterado com sucesso !')
 
             return redirect('editais:edital_view', id=edital.id)
         else:
@@ -92,7 +92,7 @@ def  edital_edit(request, id):
 def edital_delete(request, id):
     edital = get_object_or_404(Edital, pk=id)
     edital.delete()
-
+    messages.add_message(request, messages.SUCCESS, 'Edital apagado com sucesso !')
     return redirect('editais:edital_list')
 
 
@@ -142,6 +142,7 @@ def resultado_edital(request,id):
     context['edital'] = edital
     context['aprovados'] = aprovados
     context['reprovados'] = reprovados
+
     return render(request,'edital/resultado_edital.html',context)
 
 
@@ -166,6 +167,7 @@ def pergunta_add(request, id_edital):
             form = form.save(commit=False)
             form.save()
             alternativa_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Pergunta criado  com sucesso !')
             return redirect('editais:edital_view',id =edital.id)
         else:
             context['edital'] = edital
@@ -200,6 +202,7 @@ def pergunta_edit(request, id):
             form = form.save(commit=False)
             form.save()
             alternativa_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Pergunta alterado com sucesso !')
             return redirect('editais:edital_view',id =edital.id)
         else:
             context['edital'] = edital
@@ -220,7 +223,7 @@ def pergunta_delete(request, id):
     pergunta = get_object_or_404(Pergunta, pk=id)
     edital = pergunta.edital
     pergunta.delete()
-
+    messages.add_message(request, messages.SUCCESS, 'Pergunta apagado com sucesso !')
     return redirect('editais:edital_view',id =edital.id)
 
 
@@ -255,7 +258,7 @@ def inscricao_list(request):
         else:
             inscricao_list = Inscricao.objects.annotate(nome_completo=campos).filter(Q(nome_completo__icontains=search) | Q(user__fone=search))
 
-    paginator = Paginator(inscricao_list,20)
+    paginator = Paginator(inscricao_list, 30)
     page = request.GET.get('p')
     inscricao_list = paginator.get_page(page)
 
@@ -307,7 +310,7 @@ def inscricao_view_user(request, id):
 
 
 @login_required
-def inscricao_do(request,id_edital):
+def inscricao_do(request, id_edital):
 
     context = {}
     edital = get_object_or_404(Edital, pk=id_edital)
@@ -316,8 +319,8 @@ def inscricao_do(request,id_edital):
     inscricao.edital = edital
     inscricao.user = request.user
 
+    if request.method == 'POST':
 
-    if(request.method == 'POST'):
         fs = FileSystemStorage()
         inscricao.save()
 
@@ -340,7 +343,9 @@ def inscricao_do(request,id_edital):
 
             resp.save()
 
+        messages.add_message(request, messages.SUCCESS, 'Inscrição realizado com sucesso !')
         return redirect('editais:inscricao_list_user')
+
     return render(request, 'inscricao/do_inscricao.html', context)
 
 @login_required
@@ -391,6 +396,7 @@ def inscricao_edit(request, id):
 
             resp.save()
             """
+        essages.add_message(request, messages.SUCCESS, 'Inscrição Alterada com sucesso !')
         return redirect('editais:inscricao_list_user')
     else:
         context['inscricao'] = inscricao

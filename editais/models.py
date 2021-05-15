@@ -64,8 +64,8 @@ class Alternativa(models.Model):
 class Inscricao(models.Model):
 
     STATUS_CHOICE = (
-        ('df', 'Defirido'),
-        ('in', 'Indefirido'),
+        ('df', 'Deferido'),
+        ('in', 'Indeferido'),
         ('an', 'Em Analise'),
     )
 

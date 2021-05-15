@@ -2,6 +2,8 @@
 {% load static%} {% load bootstrap4 %}
 {%block title%} Alterar Edital {%endblock%} {% block content %}
 <div class="row">
+    {% include 'includes/mensagens.html'%}
+
     <div class="container">
     {% include 'includes/mensagens.html'%}
         <form method="POST"  enctype="multipart/form-data" class="col-12 ">

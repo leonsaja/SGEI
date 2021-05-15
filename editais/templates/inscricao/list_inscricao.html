@@ -28,7 +28,7 @@
 
         </div>
     </div>
-    <div class="card shadow mb-4  mt-4">
+    <div class="card  mb-4  mt-4">
         <div class="card-header">
             <h5><b>Lista de Inscrições </b></h5>
         </div>
@@ -84,13 +84,13 @@
                         <td>{{inscricao.user.first_name}}  {{inscricao.user.last_name}}</td>
                         <td>{{inscricao.edital.titulo}}</td>
                         {%if inscricao.status == "an"%}
-                        <td class = " yellow accent-2">{{inscricao.get_status_display}}</td>
+                        <td class = " bg-warning text-dark">{{inscricao.get_status_display}}</td>
                         {%endif%}
                         {%if inscricao.status == "df"%}
-                        <td class=" teal lighten-1">{{inscricao.get_status_display}}</td>
+                        <td class=" bg-success text-white">{{inscricao.get_status_display}}</td>
                         {%endif%}
                         {%if inscricao.status == "in"%}
-                        <td class = " red darken-3">{{inscricao.get_status_display}}</td>
+                        <td class = " bg-danger text-white">{{inscricao.get_status_display}}</td>
                         {%endif%}
                         <td>{{inscricao.nivel}}</td>
                         <td><a href="{% url 'editais:inscricao_view' inscricao.id %}" class="btn btn-success"> Avaliar </a></td>
