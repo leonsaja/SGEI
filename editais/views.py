@@ -379,25 +379,8 @@ def inscricao_edit(request, id):
                 resp.alternativa = alt
 
             resp.save()
-        """
-            aux = request.POST.get('pergunta-' + str(resp.pergunta.id))
-            if resp.pergunta.is_aberta:
-                resp.resposta_aberta = aux
-            elif resp.pergunta.has_arquivo:
-                nome_arq = 'arquivo-' + str(resp.pergunta.id)
-                arq = request.FILES.get(nome_arq,None)
-                if arq:
 
-                    nome_save = 'inscricoes/' + arq.name
-                    resp.arquivo = fs.save(nome_save, arq)
-
-            else:
-                alt = Alternativa.objects.get(id=int(aux))
-                resp.alternativa = alt
-
-            resp.save()
-            """
-        essages.add_message(request, messages.SUCCESS, 'Inscrição Alterada com sucesso !')
+        messages.add_message(request, messages.SUCCESS, 'Inscrição Alterada com sucesso !')
         return redirect('editais:inscricao_list_user')
     else:
         context['inscricao'] = inscricao
