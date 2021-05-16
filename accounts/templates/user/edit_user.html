@@ -50,7 +50,7 @@
                                                         {{ form.foto|as_crispy_field}}
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                         <!--  <button type="button" class="btn btn-success mt-2 ml-2" data-dismiss="modal">Salvar</button> -->
                                                         <button type="submit" class="btn btn-success mt-2 ml-2" >Salvar</button>
 
@@ -110,7 +110,12 @@
                         <div class="row">
 
                             <div class="col-sm-6">
-                                <a href="{% url 'accounts:list_user'%}" class="btn btn-danger ">Cancelar</a>
+                                {% if usuario %}
+                                      <a href="{% url 'accounts:perfil_user' %}" class="btn btn-danger ">Cancelar</a>
+                                {%else %}
+                                      <a href="{% url 'accounts:list_user'%}" class="btn btn-danger ">Cancelar2</a>
+                                {% endif%}
+
                                 <button type="submit" class="btn btn-success  ml-2">Salvar</button>
                             </div>
 
