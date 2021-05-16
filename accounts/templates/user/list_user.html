@@ -17,18 +17,17 @@
                         <th><b>Email</b></th>
                         <th><b>CPF</b></th>
                         <th><b>Telefone</b></th>
-                          <th><b>Opcão</b></th>
                     </tr>
                     </thead>
                     <tbody>
                    {% for user in list_user %}
                     <tr>
 
-                        <td>{{user.first_name}} {{last_name}}</td>
+
+                        <td>{{user.first_name}}  {{user.last_name}}</td>
                          <td>{{user.email}}</td>
                          <td>{{user.cpf}}</td>
                          <td>{{user.fone}}</td>
-                         <td><a href="{% url 'accounts:upd_user' user.id %}" class="btn btn-success">Editar</a></td>
 
                     </tr>
                     {% endfor %}

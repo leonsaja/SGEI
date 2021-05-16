@@ -8,10 +8,9 @@ from .models import User
 
 @admin.register(User)
 class CustomUsuarioAdmin(UserAdmin):
-    add_form = CustomUsuarioCreateForm
-    form = CustomUsuarioChangeForm
+
     model = User
-    list_display = ('email','first_name','cpf', 'fone', 'is_staff')
+    list_display = ('username','email','first_name','cpf', 'fone', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Informações Pessoais', {'fields': ('first_name', 'last_name', 'cpf','fone','foto')}),

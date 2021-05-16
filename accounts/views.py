@@ -45,8 +45,8 @@ def register_user(request):
 
 
 def usuario_edit(request, id):
-    context = {}
 
+    context = {}
     user = get_object_or_404(User, pk=id)
     if request.method == 'POST':
 
@@ -158,6 +158,6 @@ def create_user_arquivo(request):
 def list_users(request):
 
     context = {}
-    users = User.objects.filter(is_active=True)
+    users = User.objects.filter(is_staff=True)
     context['list_user'] = users
     return render(request, 'user/list_user.html', context)
