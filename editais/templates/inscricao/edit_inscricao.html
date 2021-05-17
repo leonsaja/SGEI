@@ -23,25 +23,25 @@
 
                             {% if resp.pergunta.is_aberta == True and resp.pergunta.has_arquivo == True %}
 
-                             <div class="form-group col-sm-12">
-                             <label class="ml-2">{{resp.pergunta.descricao}}</label>
-
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">Arquivo</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="arquivo-{{resp.pergunta.id}}" class="custom-file-input"  id="arquivo-{{resp.pergunta.id}}" value="{{MEDIA_URL}}{{ resp.arquivo}}">
-                                        <label class="custom-file-label">{{MEDIA_URL}}{{ resp.arquivo}}</label>
-                                    </div>
-                                 </div>
-                            </div>
+                                        <label class="ml-2">{{resp.pergunta.descricao}}</label>
+                                        <input type="file" name="arquivo-{{pergunta.id}}" class="form-control ml-2">
+
+                                </div>
 
                             {%elif resp.pergunta.is_aberta == True%}
 
                                 <div class="form-group col-sm-12">
                                     <label for="pergunta-{{resp.pergunta.id}}">{{resp.pergunta.descricao}}</label>
                                     <input id="pergunta-{{resp.pergunta.id}}" class="form-control" type="text" name="pergunta-{{resp.pergunta.id}}" value="{{resp.resposta_aberta}}" />
+                                </div>
+
+                             {%elif resp.pergunta.has_arquivo == True %}
+                                <div class="input-group mb-3">
+                                        <label  class="ml-2">{{resp.pergunta.descricao}}</label>
+
+                                        <input type="file" name="arquivo-{{pergunta.id}}" class="form-control-file ml-2">
+
                                 </div>
 
                             {%else%}

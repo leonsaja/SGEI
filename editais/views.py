@@ -337,6 +337,13 @@ def inscricao_do(request, id_edital):
             elif pergunta.is_aberta:
                 aux = request.POST.get('pergunta-' + str(pergunta.id))
                 resp.resposta_aberta = aux
+
+            elif pergunta.has_arquivo:
+                nome_arq = 'arquivo-' + str(pergunta.id)
+                arq = request.FILES.get(nome_arq)
+                nome_save = 'inscricoes/' + arq.name
+                resp.arquivo = fs.save(nome_save, arq)
+
             else:
                 aux = request.POST.get('pergunta-' + str(pergunta.id))
                 alt = Alternativa.objects.get(id=int(aux))
@@ -373,6 +380,14 @@ def inscricao_edit(request, id):
             elif resp.pergunta.is_aberta:
                 aux = request.POST.get('pergunta-' + str(resp.pergunta.id))
                 resp.resposta_aberta = aux
+
+            elif resp.pergunta.has_arquivo:
+                nome_arq = 'arquivo-' + str(resp.pergunta.id)
+                arq = request.FILES.get(nome_arq, None)
+                if arq:
+                    nome_save = 'inscricoes/' + arq.name
+                    resp.arquivo = fs.save(nome_save, arq)
+
             else:
                 aux = request.POST.get('pergunta-' + str(resp.pergunta.id))
                 alt = Alternativa.objects.get(id=int(aux))

@@ -8,59 +8,59 @@
 <div class="container">
     {% include 'includes/mensagens.html'%}
     <div class="card">
-            <div class="card-header">
-                <h4> <b>Nova Inscrição</b></h4>
+        <div class="card-header">
+            <h4> <b>Nova Inscrição</b></h4>
+        </div>
+        <form method="post" enctype="multipart/form-data" class="col-12">
+            <div class="form-row">
+                {%csrf_token%}
+                <div class="form-group col-sm-12">
+                    <label class="ml-2" for="edital_titulo">Edital</label>
+                    <input id="edital_titulo" class="form-control" type="text" name="edital_titulo" value="{{edital.titulo}}" readonly>
+                </div>
+
+                {%for pergunta in edital.pergunta_set.all%}
+
+                {%if pergunta.is_aberta == True and pergunta.has_arquivo == True %}
+                <div class="input-group mb-3">
+                    <label for="exampleFormControlFile1" class="ml-2">{{pergunta.descricao}}</label>
+                    <input type="file" name="arquivo-{{pergunta.id}}" class="form-control-file ml-2" id="exampleFormControlFile1">
+                </div>
+
+                {% elif pergunta.is_aberta == True%}
+                <div class="form-group col-sm-12">
+                    <label for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
+                    <input id="edital_titulo" class="form-control" type="text" name="pergunta-{{pergunta.id}} " required>
+                </div>
+
+                {% elif pergunta.has_arquivo == True%}
+
+                <div class="input-group mb-3">
+                    <label for="exampleFormControlFile1" class="ml-2">{{pergunta.descricao}}</label>
+                    <input type="file" name="arquivo-{{pergunta.id}}" class="form-control-file ml-2" id="exampleFormControlFile1">
+                </div>
+
+
+                {% else %}
+                <div class="form-group col-sm-12 ">
+                    <label class="ml-1" for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
+                    <select class="custom-select" name="pergunta-{{pergunta.id}}" required>
+                        <option selected>Escolha uma Opção</option>
+                        {%for alternativa in pergunta.alternativa_set.all%}
+                        <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
+                        {%endfor%}
+                    </select>
+
+                </div>
+                {%endif%}
+                {%endfor%}
+
+
+                <a href="{% url 'editais:inscricao_view_user' edital.id %}" class="btn btn-danger  mr-2 ml-2 mb-2">Cancelar</a>
+                <button type="submit" class="btn btn-success mb-2 " >Salvar</button>
+
             </div>
-                    <form method="post" enctype="multipart/form-data" class="col-12">
-                        <div class="form-row">
-                            {%csrf_token%}
-                            <div class="form-group col-sm-12">
-                                <label class="ml-2" for="edital_titulo">Edital</label>
-                                <input id="edital_titulo" class="form-control" type="text" name="edital_titulo" value="{{edital.titulo}}" readonly>
-                            </div>
-
-                            {%for pergunta in edital.pergunta_set.all%}
-
-                            {%if pergunta.is_aberta == True and pergunta.has_arquivo == True %}
-                            <div class="form-group col-sm-12">
-                                <label class="ml-2">{{pergunta.descricao}}</label>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Arquivo</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="arquivo-{{pergunta.id}}" class="custom-file-input" id="arquivo-{{pergunta.id}}" required>
-                                        <label class="custom-file-label">Escolher arquivo</label>
-                                    </div>
-                                </div>
-                            </div>
-                            {%elif  pergunta.is_aberta == True%}
-                            <div class="form-group col-sm-12">
-                                <label for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
-                                <input id="edital_titulo" class="form-control" type="text" name="pergunta-{{pergunta.id}} " required>
-                            </div>
-
-                            {%else%}
-                            <div class="form-group col-sm-12 ">
-                                <label class="ml-1" for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
-                                <select class="custom-select" name="pergunta-{{pergunta.id}}" required>
-                                    <option selected>Escolha uma Opção</option>
-                                    {%for alternativa in pergunta.alternativa_set.all%}
-                                    <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
-                                    {%endfor%}
-                                </select>
-
-                            </div>
-                            {%endif%}
-                            {%endfor%}
-
-
-                            <a href="{% url 'editais:inscricao_view_user' edital.id %}" class="btn btn-danger  mr-2 ml-2 mb-2">Cancelar</a>
-                            <button type="submit" class="btn btn-success mb-2 " >Salvar</button>
-
-                        </div>
-                    </form>
+        </form>
     </div>
 
 </div>
