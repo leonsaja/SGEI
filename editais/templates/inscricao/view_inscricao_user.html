@@ -51,6 +51,10 @@
                         <td colspan="2">
                             <a href="/media/{{resp.arquivo }} " target='_blank'><span class="text-dark">{{MEDIA_URL}}{{ resp.arquivo}}</span></a>
                         </td>
+                        {%elif resp.pergunta.has_arquivo == True %}
+                        <td colspan="2">
+                            <a href="/media/{{resp.arquivo }} " target='_blank'><span class="text-dark">{{MEDIA_URL}}{{ resp.arquivo}}</span></a>
+                        </td>
                         {%elif resp.pergunta.is_aberta %}
                         <td colspan="2"><span class="text-dark">{{resp.resposta_aberta}}</span></td>
                         {%else%}
