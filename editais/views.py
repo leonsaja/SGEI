@@ -384,6 +384,7 @@ def inscricao_edit(request, id):
             elif resp.pergunta.has_arquivo:
                 nome_arq = 'arquivo-' + str(resp.pergunta.id)
                 arq = request.FILES.get(nome_arq, None)
+
                 if arq:
                     nome_save = 'inscricoes/' + arq.name
                     resp.arquivo = fs.save(nome_save, arq)
