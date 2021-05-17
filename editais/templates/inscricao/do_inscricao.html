@@ -22,30 +22,30 @@
                 {%for pergunta in edital.pergunta_set.all%}
 
                 {%if pergunta.is_aberta == True and pergunta.has_arquivo == True %}
-                <div class="input-group mb-3">
-                    <label for="exampleFormControlFile1" class="ml-2">{{pergunta.descricao}}</label>
-                    <input type="file" name="arquivo-{{pergunta.id}}" class="form-control-file ml-2" id="exampleFormControlFile1">
-                </div>
-
+                        <label class="ml-2">{{pergunta.descricao}}</label>
+                        <div class="input-group mb-3">
+                            <input type="file"  name="arquivo-{{pergunta.id}}" class="custom-file-input" id="inputfile" required>
+                            <label class="custom-file-label" for="inputfile">Escolher arquivo</label>
+                        </div>
                 {% elif pergunta.is_aberta == True%}
                 <div class="form-group col-sm-12">
                     <label for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
-                    <input id="edital_titulo" class="form-control" type="text" name="pergunta-{{pergunta.id}} " required>
+                       <textarea class="form-control" name="pergunta-{{pergunta.id}}" id="pergunta-{{pergunta.id}}" rows="3" required></textarea>
                 </div>
 
                 {% elif pergunta.has_arquivo == True%}
 
-                <div class="input-group mb-3">
-                    <label for="exampleFormControlFile1" class="ml-2">{{pergunta.descricao}}</label>
-                    <input type="file" name="arquivo-{{pergunta.id}}" class="form-control-file ml-2" id="exampleFormControlFile1">
-                </div>
-
+                        <label class="ml-2">{{pergunta.descricao}}</label>
+                        <div class="input-group mb-3">
+                            <input type="file"  name="arquivo-{{pergunta.id}}" class="custom-file-input" id="inputfile" required>
+                            <label class="custom-file-label" for="inputfile">Escolher arquivo</label>
+                        </div>
 
                 {% else %}
                 <div class="form-group col-sm-12 ">
-                    <label class="ml-1" for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
+                    <label class="ml-1">{{pergunta.descricao}}</label>
                     <select class="custom-select" name="pergunta-{{pergunta.id}}" required>
-                        <option selected>Escolha uma Opção</option>
+                        <option  value="">Escolha uma Opção</option>
                         {%for alternativa in pergunta.alternativa_set.all%}
                         <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
                         {%endfor%}
@@ -65,6 +65,12 @@
 
 </div>
 
-
-
 {% endblock %}
+
+
+{% block scripts %}
+$('input[type="file"]').change(function(e){
+var fileName = e.target.files[0].name;
+$('.custom-file-label').html(fileName);
+});
+{%endblock %}

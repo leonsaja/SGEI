@@ -396,8 +396,10 @@ def inscricao_edit(request, id):
 
             resp.save()
 
+
         messages.add_message(request, messages.SUCCESS, 'Inscrição Alterada com sucesso !')
         return redirect('editais:inscricao_list_user')
+
     else:
         context['inscricao'] = inscricao
     return render(request, 'inscricao/edit_inscricao.html', context)
