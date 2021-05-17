@@ -10,14 +10,8 @@
     </div>
 
     <!-- Content Row -->
-      {% if messages %}
-            <br>
-                {% for message in messages %}
-                    <div class="alert {{ message.tags}} " role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {% endif %}
+                     {% include 'includes/mensagens.html'%}
+
     <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
@@ -173,6 +167,8 @@
 </div>
 {% else %}
     <div class="container">
+        {% include 'includes/mensagens.html'%}
+
        <div class="text-center">
 
             <h2><b>Assistência Estudantil</b></h2>
