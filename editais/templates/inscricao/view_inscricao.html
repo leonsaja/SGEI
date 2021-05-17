@@ -59,16 +59,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 ">
-            <form method="post" >
-                {% csrf_token %}  {% bootstrap_form form %}
-                <input type="submit" value="Avaliar" class=" btn btn-success mt-4 ml-2 mb-2" style="margin-bottom:
-                        </form>
-                    </div>
-                    <div class="col-md-4">
-                <a href="{% url 'relatorios:inscricaodetalhada' inscricao.id%}" class="btn btn-info  mt-4 ml-2 mb-2 " style="margin-bottom: 1em ;">Imprimir</a>
-            </form>
-        </div>
+        <form method="post" class="col-md-12" >
+            {% csrf_token %}  {% bootstrap_form form %}
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{% url 'editais:inscricao_list' %}" class="btn btn-danger mt-4 ml-2 mb-2 "> Cancelar</a>
+                    <button type="submit"  class=" btn btn-success mt-4 ml-2 mb-2" >Avaliar</button>
+                    <a href="{% url 'relatorios:inscricaodetalhada' inscricao.id%}" class="btn btn-info  mt-4 ml-2 mb-2 " style="margin-bottom: 1em ;">Imprimir</a>
+
+                </div>
+            </div>
+        </form>
     </div>
 
 </div>

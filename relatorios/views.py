@@ -9,6 +9,7 @@ def relatorioedital(request, id):
 
     edital = get_object_or_404(Edital, pk=id)
 
+
     template_path = 'relatorio/inscricoes/inscricoes_edital.html'
     context = {'edital':edital}
     # Create a Django response object, and specify content_type as pdf
@@ -16,7 +17,7 @@ def relatorioedital(request, id):
     #if download:
     #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
     #if display:
-    response['Content-Disposition'] ='filename="report.pdf"'
+    response['Content-Disposition'] ='filename="Lista de Candidatos Inscrito no edital.pdf"'
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
@@ -41,7 +42,7 @@ def pdf_inscricaoDetelhada(request, id):
     # if download:
     # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
     # if display:
-    response['Content-Disposition'] = 'filename="report.pdf"'
+    response['Content-Disposition'] = 'filename="Inscrição do Aluno.pdf"'
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)

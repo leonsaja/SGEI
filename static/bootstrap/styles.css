@@ -11,7 +11,7 @@
 }
 /*  rodape da pagina */
 .sticky-footer.rodape{
-     background-color: #066017;
+      background-color:transparent;
 }
 /* collapse botão */
 .card-header.coll{
