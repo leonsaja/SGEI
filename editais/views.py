@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q,Value
 from django.db.models.functions import Concat
 from django.contrib import  messages
+from accounts.models import  User
 #Edital área
 
 # administração
@@ -144,6 +145,19 @@ def resultado_edital(request,id):
     context['reprovados'] = reprovados
 
     return render(request,'edital/resultado_edital.html',context)
+
+def resultado_aluno (request, id):
+
+    context = {}
+    edital = get_object_or_404(Edital, pk=id)
+    aprovado = Inscricao.objects.filter(edital=edital, status='df')
+    reprovado = Inscricao.objects.filter(edital=edital, status='in')
+
+    context['edital'] = edital
+    context['aprovado'] = aprovado
+    context['reprovado'] = reprovado
+
+    return render(request, 'edital/resultado_aluno.html', context)
 
 
 #------------------- Perguntas ---------------------

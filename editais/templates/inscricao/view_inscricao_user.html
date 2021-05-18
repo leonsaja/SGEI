@@ -17,7 +17,7 @@
                     {%if inscricao.edital.status == "ab"%}
                     <a href="{% url 'editais:inscricao_edit' inscricao.id%}" class="btn btn-warning float-right mr-2 mt-0 mb-0">Editar</a>
                     {%elif inscricao.status == "df" or  inscricao.status == "in" %}
-                        <a href="#" class="btn btn-success float-right mr-2 mt-0 mb-0">Resultado</a>
+                        <a href="{% url 'editais:resultado_aluno' inscricao.edital.id %}" class="btn btn-success float-right mr-2 mt-0 mb-0">Resultado</a>
                     {% else%}
                          <a href="{% url 'editais:resultado_edital' inscricao.edital.id%}" class="btn btn-success float-right mr-2 mt-0 mb-0 disabled">Aguardando</a>
                     {%endif%}
