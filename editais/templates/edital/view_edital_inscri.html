@@ -41,7 +41,7 @@
                             {%elif edital.status == "em"%}
                                  <a href="{% url 'editais:inscricao_do' edital.id %}" class="btn btn-success disabled">Aguardando</a>
                             {%elif edital.status == "fn"%}
-                                  <a href="{% url 'editais:resultado_edital' edital.id%}" class="btn btn-success ">Resultados</a>
+                                  <a href="#" class="btn btn-success ">Resultados</a>
                             {%endif%}
 
                         </div>

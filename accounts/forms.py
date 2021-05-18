@@ -4,6 +4,9 @@ from .models import User
 from django.core.exceptions import ValidationError
 
 
+
+
+
 class LoginForm(forms.Form):
     Login = forms.CharField(
 
@@ -57,9 +60,10 @@ class CustomUsuarioChangeForm(UserChangeForm):
 
     first_name = forms.CharField(label='Nome')
     last_name = forms.CharField(label='Sobrenome')
-    cpf = forms.CharField(label='CPF')
+
     fone = forms.CharField(label='Telefone')
     username = forms.CharField(label='Usuário')
+
 
     class Meta:
         model = User

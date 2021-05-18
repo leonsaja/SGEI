@@ -48,9 +48,11 @@ def usuario_edit(request, id):
 
     context = {}
     user = get_object_or_404(User, pk=id)
+
     if request.method == 'POST':
 
         form = CustomUsuarioChangeForm(request.POST, request.FILES, instance=user, prefix='user')
+        print(request.FILES)
 
         if form.is_valid():
             form = form.save(commit=False)
